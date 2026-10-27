@@ -1,0 +1,137 @@
+[
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/PLL/ABC_DQ0_NEG_F.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/PLL/ABC_DQ0_POS_F.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/PLL/SPLL_3ph_DDSRF_F.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/PLL/grid_pll.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/adaptive/ann_adaptive.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/adaptive/ann_models.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/communication/can_control.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/control/inner_loop.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/control/inverter_state.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/control/presync.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/control/three_level_modulation.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/control/vsg.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/hardware/can_port.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/hardware/pwm_output.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/inverter.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/inverter_settings.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/isr/control_isr.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/math/pi_controller.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/measurement/adc_measurement.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/measurement/feedback_dq.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device/device.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device/f28p55x_codestartbranch.asm"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/empty_driverlib_main.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg/board.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg/c2000ware_libraries.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/control/vsg_auto_test.c"
+   },
+   {
+      "directory" : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH",
+      "command"   : "clang++ -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55\" -I\"C:/ti/C2000Ware_26_01_00_00\" -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/device\" -I\"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/\" -I\"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include\" -D_FLASH -DDEBUG -D_LAUNCHXL_F28P55X -I\"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg\" -DF28P55x=1 -xc",
+      "file"      : "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/app/control/reactive_control.c"
+   }
+]

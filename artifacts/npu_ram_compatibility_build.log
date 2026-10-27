@@ -1,0 +1,63 @@
+Running script...
+Validating...
+warning: /driverlib/default_warning.js: Add the 'Device Support' module in order to use Clock Tree tool and generate device support files. This suggestion can be ignored if not using the Clock Tree tool.
+info: PWM1(/driverlib/epwm.js) epwmTimebase_clockDiv: For perfectly synchronized TBCLKs across multiple EPWM modules, the prescaler bits in the TBCTL register of each EPWM module must be set identically
+info: PWM1(/driverlib/epwm.js) epwmActionQualifier_t1Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM1(/driverlib/epwm.js) epwmActionQualifier_t2Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM1(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZA: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PWM1(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZB: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PWM2(/driverlib/epwm.js) epwmTimebase_clockDiv: For perfectly synchronized TBCLKs across multiple EPWM modules, the prescaler bits in the TBCTL register of each EPWM module must be set identically
+info: PWM2(/driverlib/epwm.js) epwmActionQualifier_t1Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM2(/driverlib/epwm.js) epwmActionQualifier_t2Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM2(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZA: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PWM2(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZB: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PWM3(/driverlib/epwm.js) epwmTimebase_clockDiv: For perfectly synchronized TBCLKs across multiple EPWM modules, the prescaler bits in the TBCTL register of each EPWM module must be set identically
+info: PWM3(/driverlib/epwm.js) epwmActionQualifier_t1Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM3(/driverlib/epwm.js) epwmActionQualifier_t2Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM3(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZA: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PWM3(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZB: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PWM4(/driverlib/epwm.js) epwmTimebase_clockDiv: For perfectly synchronized TBCLKs across multiple EPWM modules, the prescaler bits in the TBCTL register of each EPWM module must be set identically
+info: PWM4(/driverlib/epwm.js) epwmActionQualifier_t1Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM4(/driverlib/epwm.js) epwmActionQualifier_t2Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM4(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZA: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PWM4(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZB: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PWM5(/driverlib/epwm.js) epwmTimebase_clockDiv: For perfectly synchronized TBCLKs across multiple EPWM modules, the prescaler bits in the TBCTL register of each EPWM module must be set identically
+info: PWM5(/driverlib/epwm.js) epwmActionQualifier_t1Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM5(/driverlib/epwm.js) epwmActionQualifier_t2Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM5(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZA: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PWM5(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZB: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PWM6(/driverlib/epwm.js) epwmTimebase_clockDiv: For perfectly synchronized TBCLKs across multiple EPWM modules, the prescaler bits in the TBCTL register of each EPWM module must be set identically
+info: PWM6(/driverlib/epwm.js) epwmActionQualifier_t1Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM6(/driverlib/epwm.js) epwmActionQualifier_t2Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PWM6(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZA: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PWM6(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZB: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PMW7(/driverlib/epwm.js) epwmTimebase_clockDiv: For perfectly synchronized TBCLKs across multiple EPWM modules, the prescaler bits in the TBCTL register of each EPWM module must be set identically
+info: PMW7(/driverlib/epwm.js) epwmActionQualifier_t1Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PMW7(/driverlib/epwm.js) epwmActionQualifier_t2Source: T1/T2 selection and configuration of a trip/digital-compare event is indpendent of the configuration of that event in the Trip-Zone submodule
+info: PMW7(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZA: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+info: PMW7(/driverlib/epwm.js) epwmTripZone_EPWM_TZ_ACTION_EVENT_TZB: Conflicting actions on the TZCTL, TZCTL2, TZCTLDCA or TZCTLDCB registers. Refer to the TRM for the priority scheme.
+0 error(s), 1 warning(s)
+Generating Code (c2000.syscfg)...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\board.c...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\board.h...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\board.cmd.genlibs...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\board.opt...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\board.json...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\pinmux.csv...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\epwm.dot...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\adc.dot...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\c2000ware_libraries.cmd.genlibs...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\c2000ware_libraries.opt...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\c2000ware_libraries.c...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\c2000ware_libraries.h...
+Writing C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e\syscfg\clocktree.h...
+<Linking>
+Target build passed (LaunchPad=True, Flash=False): C:\Users\11232\AppData\Local\Packages\sandbox.{ca8c4d04-96ca-4757-ae7e-83bdc7a9e2ca}\AC\Temp\vsg-ann-target-98acbc6c93c74db583b91996706ec41e/inverter.out
+.ann_weights 
+*          0    0000e000    00000bd4     
+.stack     0    00000400    000003f8     UNINITIALIZED
+                  00000400    000003f8     --HOLE--
+.bss       0    0000a800    00000202     UNINITIALIZED
+                  0000a800    000000ae     can_port.obj (.bss)
+.const     0    0000b000    000005f6     
+                  0000b000    0000009a     driverlib.lib : sysctl.obj (.const:.string)

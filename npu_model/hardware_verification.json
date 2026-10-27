@@ -1,0 +1,12 @@
+{
+  "hardware_fully_connected_layers": [
+    "tvmgen_default_ti_npu_fullyConnected_0",
+    "tvmgen_default_ti_npu_fullyConnected_1",
+    "tvmgen_default_ti_npu_fullyConnected_2"
+  ],
+  "input": "int8[16]",
+  "output": "float[2] (normalized L/R)",
+  "library_sha256": "c1ace3b030eb985a8aefd22386b377bc5afd251b3b98698cd6e209a76fff1e97",
+  "board_test": "not performed",
+  "note": "Backend's registry timing/memory estimates describe its example entry, not this custom model"
+}

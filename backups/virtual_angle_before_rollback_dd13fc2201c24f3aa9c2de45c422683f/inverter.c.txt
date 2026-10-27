@@ -1,0 +1,130 @@
+#include "inverter.h"
+#include "measurement/adc_measurement.h"
+#include "measurement/feedback_dq.h"
+#include "control/inner_loop.h"
+#include "control/presync.h"
+#include "control/vsg.h"
+#include "control/vsg_auto_test.h"
+#include "control/three_level_modulation.h"
+#include "hardware/pwm_output.h"
+#include "PLL/grid_pll.h"
+#include "adaptive/ann_adaptive.h"
+#include "communication/can_control.h"
+#include "driverlib.h"
+#include "board.h"
+
+static void HandleTransition(void)
+{
+    if(INV_CTRL.state == INV_GRID_CONNECTED && INV_CTRL.last_state != INV_GRID_CONNECTED)
+    {
+        VSG_EnterGrid(&VSG_CTRL, &INV_PARAM.vsg, TWO_PI * INV_CMD.f_ref, -0.0207f, INV_CMD.Vd_ref, INV_CMD.q_ref - INV_FEEDBACK.Qe_pu);
+        Presync_Reset(&PRESYNC_CTRL);
+    }
+    else if(INV_CTRL.state != INV_GRID_CONNECTED && INV_CTRL.last_state == INV_GRID_CONNECTED && INV_CMD.run_enable == 1U)
+    {
+        INV_CMD.f_ref = (VSG_CTRL.omega0 + VSG_CTRL.omega_sync + VSG_CTRL.omega_m) / TWO_PI;
+        Presync_Reset(&PRESYNC_CTRL);
+        VSG_Reset(&VSG_CTRL);
+    }
+}
+
+void Inverter_Init(void)
+{
+    PwmOutput_Init();
+    InverterSettings_Init();
+    GPIO_writePin(GPIO12, 0U);
+    FeedbackDq_Init();
+    InnerLoop_Init(&INV_PARAM.inner);
+    GridPll_Init();
+    Presync_Init(&PRESYNC_CTRL);
+    VSG_Init(&VSG_CTRL);
+    AnnAdaptive_Init();
+    VsgAutoTest_Init();
+    CanControl_Init();
+    InvState_Init();
+    Modulation_Reset();
+}
+
+void Inverter_ControlStep(void)
+{
+    uint16_t div;
+    bool annEligible, restartPrediction;
+    PRESYNC_INPUT sync;
+    float diff[3], voltageMax = MODULATION_LIMIT * 0.5f * INV_PARAM.Vdc;
+    CanControl_ProcessPending();
+    FeedbackDq_Update(INV_CTRL.theta);
+    sync.grid_valid = gridPllValid == 1U && gridPllLocked == 1U;
+    sync.grid_theta = grid_theta;
+    sync.grid_frequency = SPLL_GRID.fo;
+    sync.grid_d = SPLL_GRID.d_p_decoupl_lpf;
+    sync.grid_q = SPLL_GRID.q_p_decoupl_lpf;
+    sync.vd = INV_FEEDBACK.Vd_cap;
+    sync.vq = INV_FEEDBACK.Vq_cap;
+    if(INV_CTRL.state != INV_GRID_CONNECTED)
+        INV_CMD.Vd_ref = Presync_Calc(&PRESYNC_CTRL, &INV_PARAM.presync, &sync, INV_CMD.presync_request == 1U && INV_CMD.run_enable == 1U, INV_CTRL.theta, INV_CMD.f_ref, INV_CMD.Vd_ref, voltageMax, CONTROL_TS);
+    FeedbackDq_CalcPower();
+    diff[0] = PCC_ua - Va_cap; diff[1] = PCC_ub - Vb_cap; diff[2] = PCC_uc - Vc_cap;
+    InvState_Step(&INV_CTRL, &INV_CMD, PRESYNC_CTRL.sync_ready == 1U, sync.grid_valid, diff, INV_PARAM.grid_diff_max);
+    HandleTransition();
+    restartPrediction = VsgAutoTest_Step(INV_CTRL.state == INV_GRID_CONNECTED, gridPllValid == 1U);
+    // Cancel the old feature window/result before a mode change can apply stale J/D.
+    if(VSG_CTRL.virtual_angle_mode != (INV_CMD.virtual_angle_mode <= 2U ? INV_CMD.virtual_angle_mode : 0U)) restartPrediction = true;
+    annEligible = !restartPrediction && INV_CMD.ann_enable == 1U && INV_CTRL.state == INV_GRID_CONNECTED && INV_CMD.p_ref > 0.0f && gridPllValid == 1U;
+    if(!annEligible) AnnAdaptive_Sample(false, 0.0f, 0.0f);
+    if(INV_CTRL.state != INV_GRID_CONNECTED) INV_CMD.jd_adapt_enable = 0U;
+    if(annEligible) AnnAdaptive_Apply(&INV_PARAM.vsg, INV_CMD.jd_adapt_enable == 1U, INV_CMD.jd_apply_cmd == 1U);
+    INV_CMD.jd_apply_cmd = 0U; // Accepted or rejected this tick, never queued.
+    if(INV_CTRL.state == INV_STANDBY)
+    {
+        Presync_Reset(&PRESYNC_CTRL);
+        VSG_Reset(&VSG_CTRL);
+        InnerLoop_Reset();
+        Modulation_Reset();
+        INV_CTRL.theta = 0.0f;
+        INV_CTRL.omega = TWO_PI * INV_CMD.f_ref;
+        return;
+    }
+    if(INV_CTRL.state == INV_GRID_CONNECTED)
+    {
+        if(INV_CTRL.last_state == INV_GRID_CONNECTED)
+        {
+            div = (INV_PARAM.vsg.power_loop_div > 0U) ? INV_PARAM.vsg.power_loop_div : 1U;
+            VSG_CTRL.power_loop_cnt++;
+            if(VSG_CTRL.power_loop_cnt >= div)
+            {
+                VSG_CTRL.power_loop_cnt = 0U;
+                INV_CMD.Vd_ref = VSG_PowerLoop(&VSG_CTRL, &INV_PARAM.vsg, INV_CMD.p_ref, INV_CMD.q_ref, INV_FEEDBACK.Pe_pu, INV_FEEDBACK.Qe_pu, voltageMax, CONTROL_TS * (float)div);
+            }
+        }
+        INV_CTRL.omega = VSG_CTRL.omega0 + VSG_CTRL.omega_sync + VSG_CTRL.omega_m;
+        // Both angles describe the current acquisition, BEFORE advancing the PWM angle below.
+        VSG_VirtualAngleUpdate(&VSG_CTRL, INV_CTRL.theta, grid_theta, CONTROL_TS, INV_CMD.p_ref > 0.0f, gridPllValid == 1U, INV_CMD.virtual_angle_mode);
+        if(VSG_VirtualAngleEstablish(&VSG_CTRL, &INV_PARAM.virtual_angle, CONTROL_TS, gridPllLocked == 1U, SPLL_GRID.fo, INV_FEEDBACK.Pe_pu, INV_FEEDBACK.Qe_pu, INV_CMD.p_ref, INV_CMD.q_ref))
+        {
+            AnnAdaptive_Sample(false, 0.0f, 0.0f);
+            annEligible = false; // New derivative definition: start a fresh ANN window next tick.
+        }
+    }
+    else INV_CTRL.omega = TWO_PI * INV_CMD.f_ref + PRESYNC_CTRL.omega_sync;
+    if(annEligible && VSG_CTRL.virtual_angle_valid == 1U) AnnAdaptive_Sample(true, INV_FEEDBACK.Qe, VSG_CTRL.virtual_angle_deg);
+    else if(annEligible) AnnAdaptive_Sample(false, 0.0f, 0.0f);
+    InnerLoop_Calc(&INV_PARAM.inner, &INV_FEEDBACK, INV_CMD.Vd_ref, INV_CMD.Vq_ref, INV_CTRL.omega, INV_PARAM.Vdc, CONTROL_TS);
+    INV_CTRL.theta += INV_CTRL.omega * CONTROL_TS;
+    if(INV_CTRL.theta >= TWO_PI) INV_CTRL.theta -= TWO_PI;
+    if(INV_CTRL.theta < 0.0f) INV_CTRL.theta += TWO_PI;
+    Modulation_Update(INNER_CTRL.ud_ref, INNER_CTRL.uq_ref, INV_CTRL.theta);
+}
+
+void Inverter_Step(void)
+{
+    AdcMeasurement_Acquire();
+    GridPll_Update(PCC_ua, PCC_ub, PCC_uc, INV_CMD.pll_enable == 1U);
+    Inverter_ControlStep();
+    PwmOutput_Update(INV_CMD.run_enable == 1U, INV_CTRL.state == INV_GRID_CONNECTED, MODULATION_OUT.duty);
+    GPIO_writePin(GPIO12, INV_CMD.grid_impedance_step == 1U ? 1U : 0U);
+}
+
+void Inverter_Background(void)
+{
+    AnnAdaptive_Service();
+}

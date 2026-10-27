@@ -1,0 +1,48 @@
+{
+  "status": "FP32 surrogate only; TI QAT and hardware compilation still required",
+  "architecture": [
+    16,
+    64,
+    64,
+    2
+  ],
+  "activation": "ReLU",
+  "parameters": 5378,
+  "input_order": [
+    "Q",
+    "angle"
+  ],
+  "input_padding": "Normalize first two values using original constants; pad remaining 14 values with float zero",
+  "normalization_constants": {
+    "ANN_IN_Q_XMIN": -9746.9,
+    "ANN_IN_ANGLE_XMIN": 2.6946,
+    "ANN_IN_Q_GAIN": 0.0001866342898,
+    "ANN_IN_ANGLE_GAIN": 0.08500835207,
+    "ANN_OUT_L_SCALE": 4.5,
+    "ANN_OUT_R_SCALE": 0.435,
+    "ANN_OUT_L_XMIN": 1.0,
+    "ANN_OUT_R_XMIN": 0.1
+  },
+  "output_order": [
+    "L",
+    "R"
+  ],
+  "output_mean": [
+    3.2359364762792078,
+    0.8041675440903024
+  ],
+  "output_std": [
+    2.368518667782116,
+    0.46936755216588216
+  ],
+  "output_restore": "physical_output = network_output * output_std + output_mean",
+  "source_sha256": "a04b34fa7983cdbe0015465d82caf500ae65f5c493d4081276339f75a5128aa3",
+  "best_epoch": 977,
+  "best_validation_normalized_mse": 0.00021993510017637163,
+  "seed": 20261020,
+  "torch_version": "2.5.1+cpu",
+  "stage": "TI QAT converted; ONNX CPU comparison passed; hardware compilation not yet checked",
+  "best_qat_epoch": 69,
+  "qat_tool_path": "C:\\ti\\eaistudio1.5.0\\model-composer-extensions\\tinyml-backend-1.2.0\\_internal",
+  "onnx": "D:\\Project\\CCS\\CCSWorkspace\\VSG_BPNN_Codex\\experiments\\npu_constv_reference\\qat_ti\\model_tinpu.onnx"
+}

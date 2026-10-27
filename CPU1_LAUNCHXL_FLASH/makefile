@@ -1,0 +1,211 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+SHELL = cmd.exe
+
+CG_TOOL_ROOT := D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS
+
+GEN_OPTS__FLAG := --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt" 
+GEN_CMDS__FLAG := 
+
+ORDERED_OBJS += \
+"./syscfg/board.obj" \
+"./syscfg/c2000ware_libraries.obj" \
+"./empty_driverlib_main.obj" \
+"./app/PLL/ABC_DQ0_NEG_F.obj" \
+"./app/PLL/ABC_DQ0_POS_F.obj" \
+"./app/PLL/SPLL_3ph_DDSRF_F.obj" \
+"./app/PLL/grid_pll.obj" \
+"./app/adaptive/ann_adaptive.obj" \
+"./app/adaptive/ann_models.obj" \
+"./app/communication/can_control.obj" \
+"./app/control/inner_loop.obj" \
+"./app/control/inverter_state.obj" \
+"./app/control/presync.obj" \
+"./app/control/reactive_control.obj" \
+"./app/control/three_level_modulation.obj" \
+"./app/control/vsg.obj" \
+"./app/control/vsg_auto_test.obj" \
+"./app/hardware/can_port.obj" \
+"./app/hardware/pwm_output.obj" \
+"./app/inverter.obj" \
+"./app/inverter_settings.obj" \
+"./app/isr/control_isr.obj" \
+"./app/math/pi_controller.obj" \
+"./app/measurement/adc_measurement.obj" \
+"./app/measurement/feedback_dq.obj" \
+"./device/device.obj" \
+"./device/f28p55x_codestartbranch.obj" \
+"../28p55x_generic_flash_lnk.cmd" \
+"C:/ti/C2000Ware_26_01_00_00/driverlib/f28p55x/driverlib/ccs/Debug/driverlib.lib" \
+$(GEN_CMDS__FLAG) \
+-lc2000ware_libraries.cmd.genlibs \
+-llibc.a \
+
+-include ../makefile.init
+
+RM := DEL /F
+RMDIR := RMDIR /S/Q
+
+# All of the sources participating in the build are defined here
+-include sources.mk
+-include subdir_vars.mk
+-include app/PLL/subdir_vars.mk
+-include app/adaptive/subdir_vars.mk
+-include app/communication/subdir_vars.mk
+-include app/control/subdir_vars.mk
+-include app/hardware/subdir_vars.mk
+-include app/subdir_vars.mk
+-include app/isr/subdir_vars.mk
+-include app/math/subdir_vars.mk
+-include app/measurement/subdir_vars.mk
+-include artifacts/CPU1_LAUNCHXL_FLASH/subdir_vars.mk
+-include artifacts/PowerCompareFlash/subdir_vars.mk
+-include artifacts/npu_flash/subdir_vars.mk
+-include artifacts/npu_launchxl_flash/subdir_vars.mk
+-include device/subdir_vars.mk
+-include subdir_rules.mk
+-include app/PLL/subdir_rules.mk
+-include app/adaptive/subdir_rules.mk
+-include app/communication/subdir_rules.mk
+-include app/control/subdir_rules.mk
+-include app/hardware/subdir_rules.mk
+-include app/subdir_rules.mk
+-include app/isr/subdir_rules.mk
+-include app/math/subdir_rules.mk
+-include app/measurement/subdir_rules.mk
+-include artifacts/CPU1_LAUNCHXL_FLASH/subdir_rules.mk
+-include artifacts/PowerCompareFlash/subdir_rules.mk
+-include artifacts/npu_flash/subdir_rules.mk
+-include artifacts/npu_launchxl_flash/subdir_rules.mk
+-include device/subdir_rules.mk
+-include objects.mk
+
+ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(strip $(C55_DEPS)),)
+-include $(C55_DEPS)
+endif
+ifneq ($(strip $(C_UPPER_DEPS)),)
+-include $(C_UPPER_DEPS)
+endif
+ifneq ($(strip $(S67_DEPS)),)
+-include $(S67_DEPS)
+endif
+ifneq ($(strip $(S62_DEPS)),)
+-include $(S62_DEPS)
+endif
+ifneq ($(strip $(S_DEPS)),)
+-include $(S_DEPS)
+endif
+ifneq ($(strip $(OPT_DEPS)),)
+-include $(OPT_DEPS)
+endif
+ifneq ($(strip $(C??_DEPS)),)
+-include $(C??_DEPS)
+endif
+ifneq ($(strip $(ASM_UPPER_DEPS)),)
+-include $(ASM_UPPER_DEPS)
+endif
+ifneq ($(strip $(S??_DEPS)),)
+-include $(S??_DEPS)
+endif
+ifneq ($(strip $(C64_DEPS)),)
+-include $(C64_DEPS)
+endif
+ifneq ($(strip $(CXX_DEPS)),)
+-include $(CXX_DEPS)
+endif
+ifneq ($(strip $(S64_DEPS)),)
+-include $(S64_DEPS)
+endif
+ifneq ($(strip $(CLA_DEPS)),)
+-include $(CLA_DEPS)
+endif
+ifneq ($(strip $(S55_DEPS)),)
+-include $(S55_DEPS)
+endif
+ifneq ($(strip $(SV7A_DEPS)),)
+-include $(SV7A_DEPS)
+endif
+ifneq ($(strip $(C62_DEPS)),)
+-include $(C62_DEPS)
+endif
+ifneq ($(strip $(C67_DEPS)),)
+-include $(C67_DEPS)
+endif
+ifneq ($(strip $(K_DEPS)),)
+-include $(K_DEPS)
+endif
+ifneq ($(strip $(C_DEPS)),)
+-include $(C_DEPS)
+endif
+ifneq ($(strip $(CC_DEPS)),)
+-include $(CC_DEPS)
+endif
+ifneq ($(strip $(C++_DEPS)),)
+-include $(C++_DEPS)
+endif
+ifneq ($(strip $(C43_DEPS)),)
+-include $(C43_DEPS)
+endif
+ifneq ($(strip $(S43_DEPS)),)
+-include $(S43_DEPS)
+endif
+ifneq ($(strip $(ASM_DEPS)),)
+-include $(ASM_DEPS)
+endif
+ifneq ($(strip $(S_UPPER_DEPS)),)
+-include $(S_UPPER_DEPS)
+endif
+ifneq ($(strip $(CPP_DEPS)),)
+-include $(CPP_DEPS)
+endif
+ifneq ($(strip $(SA_DEPS)),)
+-include $(SA_DEPS)
+endif
+endif
+
+-include ../makefile.defs
+
+# Add inputs and outputs from these tool invocations to the build variables 
+EXE_OUTPUTS += \
+VSG_BPNN_Codex_28P55.out 
+
+EXE_OUTPUTS__QUOTED += \
+"VSG_BPNN_Codex_28P55.out" 
+
+
+# All Target
+all: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(A_SRCS) $(GEN_CMDS)
+	@$(MAKE) --no-print-directory -Onone "VSG_BPNN_Codex_28P55.out"
+
+# Tool invocations
+VSG_BPNN_Codex_28P55.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(A_SRCS) $(GEN_CMDS)
+	@echo 'C2000 Linker - building target: "$@"'
+	"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu1 --vcu_support=vcrc -O2 --fp_mode=relaxed --define=_FLASH --define=DEBUG --define=_LAUNCHXL_F28P55X --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi -z -m"VSG_BPNN_Codex_28P55.map" --heap_size=0x200 --stack_size=0x3F8 --warn_sections -i"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/lib" -i"C:/ti/C2000Ware_26_01_00_00" -i"D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg" -i"D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/compiler/ti-cgt-c2000_25.11.0.LTS/include" --reread_libs --define=_FLASH --diag_wrap=off --display_error_number --xml_link_info="VSG_BPNN_Codex_28P55_linkInfo.xml" --entry_point=code_start --rom_model -o "VSG_BPNN_Codex_28P55.out" $(ORDERED_OBJS) $(A_SRCS)
+	@echo 'Finished building target: "$@"'
+	@echo ' '
+	@$(MAKE) --no-print-directory post-build
+
+# Other Targets
+clean:
+	-$(RM) $(GEN_MISC_FILES__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
+	-$(RM) "syscfg\board.obj" "syscfg\c2000ware_libraries.obj" "empty_driverlib_main.obj" "app\PLL\ABC_DQ0_NEG_F.obj" "app\PLL\ABC_DQ0_POS_F.obj" "app\PLL\SPLL_3ph_DDSRF_F.obj" "app\PLL\grid_pll.obj" "app\adaptive\ann_adaptive.obj" "app\adaptive\ann_models.obj" "app\communication\can_control.obj" "app\control\inner_loop.obj" "app\control\inverter_state.obj" "app\control\presync.obj" "app\control\reactive_control.obj" "app\control\three_level_modulation.obj" "app\control\vsg.obj" "app\control\vsg_auto_test.obj" "app\hardware\can_port.obj" "app\hardware\pwm_output.obj" "app\inverter.obj" "app\inverter_settings.obj" "app\isr\control_isr.obj" "app\math\pi_controller.obj" "app\measurement\adc_measurement.obj" "app\measurement\feedback_dq.obj" "device\device.obj" "device\f28p55x_codestartbranch.obj" 
+	-$(RM) "syscfg\board.d" "syscfg\c2000ware_libraries.d" "empty_driverlib_main.d" "app\PLL\ABC_DQ0_NEG_F.d" "app\PLL\ABC_DQ0_POS_F.d" "app\PLL\SPLL_3ph_DDSRF_F.d" "app\PLL\grid_pll.d" "app\adaptive\ann_adaptive.d" "app\adaptive\ann_models.d" "app\communication\can_control.d" "app\control\inner_loop.d" "app\control\inverter_state.d" "app\control\presync.d" "app\control\reactive_control.d" "app\control\three_level_modulation.d" "app\control\vsg.d" "app\control\vsg_auto_test.d" "app\hardware\can_port.d" "app\hardware\pwm_output.d" "app\inverter.d" "app\inverter_settings.d" "app\isr\control_isr.d" "app\math\pi_controller.d" "app\measurement\adc_measurement.d" "app\measurement\feedback_dq.d" "device\device.d" 
+	-$(RM) "device\f28p55x_codestartbranch.d" 
+	-$(RMDIR) $(GEN_MISC_DIRS__QUOTED)
+	-@echo ' '
+
+post-build:
+	-echo "========= Build of the CLB simulation has moved to the CLB Tool. Click the '?' icon by the _Generate CLB Simulation File_ enable for more details (located in the Global Parameters of the Tile Design SysConfig module) ============="
+	-if 0 == 1  D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/node/node.exe "C:/ti/C2000Ware_26_01_00_00/utilities/clb_tool/clb_syscfg/dot_file_libraries/clbDotUtility.js"  "C:/ti/C2000Ware_26_01_00_00/utilities/clb_tool/clb_syscfg/" "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg" "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg/clb.dot"
+	-if 0 == 1  mkdir "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/diagrams"
+	-if 0 == 1  D:/Engineering_software/ti/CCS/CCS2051/ccs/tools/node/node.exe "C:/ti/C2000Ware_26_01_00_00/driverlib/.meta/generate_diagrams.js" "C:/ti/C2000Ware_26_01_00_00" "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/diagrams" "D:/Project/CCS/Workspace_28P550/VSG_BPNN_Codex_28P55/CPU1_LAUNCHXL_FLASH/syscfg"
+	-@echo ' '
+
+.PHONY: all clean dependents
+.SECONDARY:
+
+-include ../makefile.targets
+

@@ -1,0 +1,301 @@
+#include <assert.h>
+#include <math.h>
+#include <stdio.h>
+#include "app/control/vsg.h"
+#include "app/PLL/grid_pll.h"
+#include "app/measurement/adc_measurement.h"
+#include "app/inverter.h"
+#include "app/adaptive/ann_adaptive.h"
+
+static float Wrap(float angle) { return atan2f(sinf(angle), cosf(angle)); }
+static void NearAngle(float a, float b, float tolerance) { assert(fabsf(a - b) < tolerance); }
+
+static void TestLegacyRollback(void)
+{
+    VSG_DEF old = {0}, selected = {0};
+    unsigned k;
+    const float omega[] = {0.014f, -0.014f, 0.015f, -0.015f, 0.016f, -0.016f, 1.0f};
+    for(k = 0U; k < 10000U; k++)
+    {
+        selected.omega_m = omega[k % 7U];
+        VSG_VirtualAngleStep(&old, selected.omega_m, CONTROL_TS, true);
+        VSG_VirtualAngleUpdate(&selected, 0.0f, 0.0f, CONTROL_TS, true, false, 0U);
+        assert(selected.virtual_angle_int == old.virtual_angle_int);
+        assert(selected.virtual_angle_deg == old.virtual_angle_deg);
+        assert(selected.virtual_angle_valid == 1U);
+    }
+    puts("PASS virtual angle: mode 0 exactly matches original integral and +/-0.015 rad/s deadband");
+}
+
+static void TestCommonFrequencyAndPhase(void)
+{
+    VSG_DEF v = {0};
+    float theta = 6.27f, delta = 0.3f, frequency;
+    unsigned k;
+    for(k = 0U; k < 200000U; k++)
+    {
+        frequency = (k >= 20000U && k < 120000U) ? 49.5f : 50.0f;
+        if(k >= 20000U && k < 30000U) delta = 0.3f + 0.1f * (float)(k - 20000U) / 10000.0f;
+        else if(k >= 30000U && k < 120000U) delta = 0.4f;
+        else if(k >= 120000U && k < 130000U) delta = 0.4f - 0.05f * (float)(k - 120000U) / 10000.0f;
+        else if(k >= 130000U) delta = 0.35f;
+        v.omega_m = TWO_PI * (frequency - 50.0f);
+        VSG_VirtualAngleUpdate(&v, Wrap(theta + delta), theta, CONTROL_TS, true, true, 1U);
+        NearAngle(v.virtual_angle_int, delta - 0.3f, 0.00003f);
+        theta = Wrap(theta + TWO_PI * frequency * CONTROL_TS);
+    }
+    assert(v.virtual_angle_valid == 1U && fabsf(v.virtual_angle_legacy_int) > 30.0f);
+    NearAngle(v.virtual_angle_int, 0.05f, 0.00003f);
+    puts("PASS virtual angle: 20s 50->49.5->50Hz, common rotation rejected, real relative phase changes retained");
+}
+
+static void TestBoundariesRecoveryAndSwitch(void)
+{
+    VSG_DEF v = {0};
+    float held;
+    VSG_VirtualAngleUpdate(&v, 3.12f, 0.0f, CONTROL_TS, true, true, 1U);
+    VSG_VirtualAngleUpdate(&v, Wrap(3.16f), 0.0f, CONTROL_TS, true, true, 1U);
+    NearAngle(v.virtual_angle_int, 0.04f, 0.000002f);
+    held = v.virtual_angle_int;
+    VSG_VirtualAngleUpdate(&v, NAN, 0.0f, CONTROL_TS, true, true, 1U);
+    assert(v.virtual_angle_valid == 0U && v.virtual_angle_int == held);
+    VSG_VirtualAngleUpdate(&v, 1.0f, 0.0f, CONTROL_TS, true, false, 1U);
+    assert(v.virtual_angle_valid == 0U && v.virtual_angle_int == held);
+    VSG_VirtualAngleUpdate(&v, 1.0f, 0.0f, CONTROL_TS, true, true, 1U);
+    assert(v.virtual_angle_valid == 1U && v.virtual_angle_int == held);
+    VSG_VirtualAngleUpdate(&v, 1.02f, 0.0f, CONTROL_TS, true, true, 1U);
+    NearAngle(v.virtual_angle_int, held + 0.02f, 0.000002f);
+    held = v.virtual_angle_int;
+    v.omega_m = -3.0f;
+    VSG_VirtualAngleUpdate(&v, 1.02f, 0.0f, CONTROL_TS, true, true, 0U);
+    NearAngle(v.virtual_angle_int, held, 0.000001f);
+    VSG_VirtualAngleUpdate(&v, 1.02f, 0.0f, CONTROL_TS, true, true, 0U);
+    NearAngle(v.virtual_angle_int, held - 3.0f * CONTROL_TS, 0.000001f);
+    held = v.virtual_angle_int;
+    VSG_VirtualAngleUpdate(&v, 1.02f, 0.0f, CONTROL_TS, true, true, 1U);
+    NearAngle(v.virtual_angle_int, held, 0.000001f);
+    VSG_VirtualAngleUpdate(&v, 1.02f, 0.0f, CONTROL_TS, false, true, 1U);
+    assert(v.virtual_angle_int == 0.0f && v.virtual_angle_legacy_int == 0.0f && v.virtual_angle_phase_valid == 0U);
+    puts("PASS virtual angle: +/-pi crossing, invalid/missing PCC hold and reanchor, bumpless rollback/resume, reset");
+}
+
+static void TestActualPllFrequencyStep(void)
+{
+    VSG_DEF v = {0};
+    float theta = 0.8f, frequency;
+    unsigned k;
+    GridPll_Init();
+    for(k = 0U; k < 150000U; k++)
+    {
+        frequency = k < 30000U || k >= 90000U ? 50.0f : 49.5f;
+        PCC_ua = 155.56f * cosf(theta);
+        PCC_ub = 155.56f * cosf(theta - TWO_PI / 3.0f);
+        PCC_uc = 155.56f * cosf(theta + TWO_PI / 3.0f);
+        GridPll_Update(PCC_ua, PCC_ub, PCC_uc, true);
+        v.omega_m = TWO_PI * (frequency - 50.0f);
+        VSG_VirtualAngleUpdate(&v, Wrap(theta + 0.3f), grid_theta, CONTROL_TS, true, gridPllValid == 1U, 1U);
+        assert(isfinite(v.virtual_angle_int));
+        if(k == 29999U || k == 89999U || k == 149999U)
+        {
+            assert(gridPllLocked == 1U && fabsf(SPLL_GRID.fo - frequency) < 0.03f);
+            NearAngle(v.virtual_angle_int, 0.0f, 0.02f);
+        }
+        theta = Wrap(theta + TWO_PI * frequency * CONTROL_TS);
+    }
+    assert(fabsf(v.virtual_angle_legacy_int) > 18.0f);
+    puts("PASS virtual angle: production DDSRF PLL at 50->49.5->50Hz settles without persistent feature rotation");
+}
+
+static void TestModeSwitchInvalidatesPrediction(void)
+{
+    float h, D;
+    unsigned k;
+    Inverter_Init();
+    assert(INV_CMD.virtual_angle_mode == 2U);
+    INV_CMD.auto_test_enable = 0U;
+    INV_CMD.virtual_angle_mode = 0U;
+    INV_CMD.run_enable = INV_CMD.grid_connect_cmd = INV_CMD.ann_enable = 1U;
+    INV_CMD.p_ref = 1.0f;
+    INV_CTRL.state = INV_CTRL.last_state = INV_GRID_CONNECTED;
+    gridPllValid = 1U;
+    grid_theta = INV_CTRL.theta = 0.0f;
+    VSG_EnterGrid(&VSG_CTRL, &INV_PARAM.vsg, TWO_PI * 50.0f, -0.0207f, 155.56f, 0.0f);
+    for(k = 0U; k < ANN_AVERAGE_SAMPLES; k++) AnnAdaptive_Sample(true, 0.0f, 10.0f);
+    AnnAdaptive_Service();
+    assert(ANN_CTRL.result_valid == 1U);
+    h = INV_PARAM.vsg.h; D = INV_PARAM.vsg.dp_pu;
+    annJdApplyEnable = 1U;
+    INV_CMD.jd_apply_cmd = 1U;
+    INV_CMD.virtual_angle_mode = 1U;
+    Inverter_ControlStep();
+    assert(ANN_CTRL.result_valid == 0U && ANN_CTRL.apply_count == 0U && ANN_CTRL.ann_cnt == 0U);
+    assert(INV_PARAM.vsg.h == h && INV_PARAM.vsg.dp_pu == D);
+    assert(VSG_CTRL.virtual_angle_mode == 1U && INV_CMD.jd_apply_cmd == 0U);
+    annJdApplyEnable = 0U;
+    puts("PASS virtual angle: mode change cancels old ANN result/window before any control-parameter application");
+}
+
+static void TestControlIndependentOfFeatureMode(void)
+{
+    float theta[3], omega[3], voltage[3], h[3], D[3];
+    unsigned mode, k;
+    for(mode = 0U; mode < 3U; mode++)
+    {
+        Inverter_Init();
+        INV_CMD.auto_test_enable = INV_CMD.ann_enable = 0U;
+        INV_CMD.virtual_angle_mode = (uint16_t)mode;
+        INV_CMD.run_enable = INV_CMD.grid_connect_cmd = 1U;
+        INV_CMD.p_ref = 1.0f;
+        INV_CTRL.state = INV_CTRL.last_state = INV_GRID_CONNECTED;
+        gridPllValid = 1U;
+        INV_CTRL.theta = grid_theta = 0.0f;
+        VSG_EnterGrid(&VSG_CTRL, &INV_PARAM.vsg, TWO_PI * 50.0f, -0.0207f, 155.56f, 0.0f);
+        Va_cap = Vb_cap = Vc_cap = PCC_ua = PCC_ub = PCC_uc = 0.0f;
+        Ia_inv = Ib_inv = Ic_inv = Ia_filter = Ib_filter = Ic_filter = 0.0f;
+        for(k = 0U; k < 2000U; k++)
+        {
+            Inverter_ControlStep();
+            grid_theta = Wrap(grid_theta + TWO_PI * 49.5f * CONTROL_TS);
+        }
+        theta[mode] = INV_CTRL.theta;
+        omega[mode] = INV_CTRL.omega;
+        voltage[mode] = INV_CMD.Vd_ref;
+        h[mode] = INV_PARAM.vsg.h; D[mode] = INV_PARAM.vsg.dp_pu;
+    }
+    assert(theta[0] == theta[1] && omega[0] == omega[1] && voltage[0] == voltage[1]);
+    assert(h[0] == h[1] && D[0] == D[1]);
+    assert(theta[0] == theta[2] && omega[0] == omega[2] && voltage[0] == voltage[2]);
+    assert(h[0] == h[2] && D[0] == D[2]);
+    puts("PASS virtual angle: changing feature mode alone leaves VSG frequency, PWM angle, voltage reference and H/D identical");
+}
+
+static void TestAutomaticBaselineAndFrequencyStep(void)
+{
+    VSG_DEF v = {0};
+    float theta = 0.0f, phase = 0.02f, baseline = 0.0f;
+    unsigned k, captures = 0U;
+    InverterSettings_Init();
+    v.omega0 = TWO_PI * 50.0f;
+    for(k = 0U; k < 150000U; k++)
+    {
+        float frequency = k >= 50000U && k < 100000U ? 49.5f : 50.0f;
+        float p = k >= 50000U ? 1.1f : 1.0f;
+        if(k < 5000U) v.omega_m = 0.5f; // Establish a nonzero original virtual angle.
+        else v.omega_m = TWO_PI * (frequency - 50.0f);
+        if(k >= 50000U && k < 60000U) phase = 0.02f + 0.1f * (float)(k - 50000U) / 10000.0f;
+        else if(k >= 60000U) phase = 0.12f;
+        VSG_VirtualAngleUpdate(&v, Wrap(theta + phase), theta, CONTROL_TS, true, true, 2U);
+        if(VSG_VirtualAngleEstablish(&v, &INV_PARAM.virtual_angle, CONTROL_TS, true, frequency, p, 0.1f, p, 0.0f))
+        {
+            captures++;
+            assert(k >= 20000U && k < 30000U);
+            NearAngle(v.virtual_angle_int, v.virtual_angle_legacy_int, 0.0001f);
+            baseline = v.virtual_angle_int;
+            assert(baseline > 0.24f);
+            assert(v.angle_base.angle_rad == baseline);
+        }
+        if(k > 30000U)
+        {
+            assert(v.angle_base.ready == 1U);
+            NearAngle(v.virtual_angle_int, baseline + phase - 0.02f, 0.00004f);
+            assert(v.angle_base.angle_rad == baseline);
+        }
+        theta = Wrap(theta + TWO_PI * frequency * CONTROL_TS);
+    }
+    assert(captures == 1U && v.angle_base.ready == 1U);
+    assert(fabsf(v.virtual_angle_legacy_int) > 15.0f);
+    NearAngle(v.virtual_angle_int, baseline + 0.1f, 0.00004f);
+    VSG_VirtualAngleUpdate(&v, 0.0f, 0.0f, CONTROL_TS, true, false, 2U);
+    VSG_VirtualAngleEstablish(&v, &INV_PARAM.virtual_angle, CONTROL_TS, false, 49.5f, 1.0f, 0.0f, 1.0f, 0.0f);
+    assert(v.angle_base.ready == 1U); // Do not recalibrate on disturbance/dropout after capture.
+    VSG_Reset(&v);
+    assert(v.angle_base.ready == 0U && v.angle_base.angle_rad == 0.0f);
+    puts("PASS virtual angle auto: legacy-established nonzero baseline, continuous one-shot latch, 50->49.5->50Hz and Pref change retain baseline");
+}
+
+static void TestBaselineQualification(void)
+{
+    VSG_DEF v = {0};
+    VIRTUAL_ANGLE_PARAM cfg = {0.02f, 0.03f, 0.01f, 0.01f, 0.25f, 0.05f};
+    unsigned k;
+    v.omega0 = TWO_PI * 50.0f;
+    // A stable but initially off-nominal grid cannot establish the legacy baseline.
+    for(k = 0U; k < 3000U; k++)
+    {
+        VSG_VirtualAngleUpdate(&v, 0.1f, 0.0f, CONTROL_TS, true, true, 2U);
+        assert(!VSG_VirtualAngleEstablish(&v, &cfg, CONTROL_TS, true, 49.5f, 1.0f, 0.0f, 1.0f, 0.0f));
+    }
+    assert(v.angle_base.ready == 0U && v.angle_base.stable_s == 0.0f);
+    VSG_Reset(&v);
+    for(k = 0U; k < 3000U; k++)
+    {
+        float p = (k / 100U) % 2U ? 0.8f : 1.2f;
+        VSG_VirtualAngleUpdate(&v, 0.1f, 0.0f, CONTROL_TS, true, true, 2U);
+        assert(!VSG_VirtualAngleEstablish(&v, &cfg, CONTROL_TS, true, 50.0f, p, 0.0f, 1.0f, 0.0f));
+    }
+    assert(v.angle_base.ready == 0U); // Power must be stable, not merely delayed.
+    assert(!VSG_VirtualAngleEstablish(&v, &cfg, CONTROL_TS, false, 50.0f, 1.0f, 0.0f, 1.0f, 0.0f));
+    assert(v.angle_base.elapsed_s == 0.0f);
+    for(k = 0U; k < 50U; k++)
+    {
+        VSG_VirtualAngleUpdate(&v, 0.1f, 0.0f, CONTROL_TS, true, true, 2U);
+        VSG_VirtualAngleEstablish(&v, &cfg, CONTROL_TS, true, 50.0f, 1.0f, 0.0f, 1.0f, 0.0f);
+    }
+    VSG_VirtualAngleEstablish(&v, &cfg, CONTROL_TS, true, 50.0f, 1.1f, 0.0f, 1.1f, 0.0f);
+    NearAngle(v.angle_base.elapsed_s, CONTROL_TS, 0.000001f);
+    for(k = 0U; k < 1000U && v.angle_base.ready == 0U; k++)
+    {
+        VSG_VirtualAngleUpdate(&v, 0.1f, 0.0f, CONTROL_TS, true, true, 2U);
+        VSG_VirtualAngleEstablish(&v, &cfg, CONTROL_TS, true, 50.0f, 1.1f, 0.0f, 1.1f, 0.0f);
+    }
+    assert(v.angle_base.ready == 1U);
+    VSG_VirtualAngleUpdate(&v, 0.1f, 0.0f, CONTROL_TS, true, true, 0U);
+    assert(v.angle_base.ready == 0U);
+    VSG_VirtualAngleUpdate(&v, 0.1f, 0.0f, CONTROL_TS, true, true, 2U);
+    assert(v.angle_base.ready == 0U);
+    VSG_VirtualAngleUpdate(&v, 0.1f, 0.0f, CONTROL_TS, false, true, 2U);
+    assert(v.angle_base.ready == 0U && v.virtual_angle_int == 0.0f);
+    puts("PASS virtual angle auto: off-nominal/unstable/unlocked refusal, setpoint restart, steady capture, rollback/re-entry and stop reset");
+}
+
+static void TestCaptureCancelsAnnWindow(void)
+{
+    unsigned k;
+    Inverter_Init();
+    INV_CMD.auto_test_enable = 0U;
+    INV_CMD.run_enable = INV_CMD.grid_connect_cmd = INV_CMD.ann_enable = 1U;
+    INV_CMD.p_ref = 1.0f;
+    INV_PARAM.virtual_angle.establish_s = INV_PARAM.virtual_angle.stable_s = 0.0f;
+    INV_PARAM.virtual_angle.window_s = CONTROL_TS;
+    INV_PARAM.virtual_angle.power_change_pu = 10.0f;
+    INV_PARAM.virtual_angle.angle_change_deg = 100.0f;
+    INV_CTRL.state = INV_CTRL.last_state = INV_GRID_CONNECTED;
+    VSG_EnterGrid(&VSG_CTRL, &INV_PARAM.vsg, TWO_PI * 50.0f, -0.0207f, 155.56f, 0.0f);
+    gridPllValid = gridPllLocked = 1U;
+    SPLL_GRID.fo = 50.0f;
+    grid_theta = INV_CTRL.theta = 0.0f;
+    Inverter_ControlStep();
+    assert(VSG_CTRL.angle_base.ready == 0U);
+    for(k = 0U; k < ANN_AVERAGE_SAMPLES; k++) AnnAdaptive_Sample(true, 0.0f, 10.0f);
+    AnnAdaptive_Service();
+    assert(ANN_CTRL.result_valid == 1U);
+    Inverter_ControlStep();
+    assert(VSG_CTRL.angle_base.ready == 1U);
+    assert(ANN_CTRL.result_valid == 0U && ANN_CTRL.ann_cnt == 0U && ANN_CTRL.ann_run_flag == 0U);
+    Inverter_ControlStep();
+    assert(ANN_CTRL.ann_cnt == 1U);
+    puts("PASS virtual angle auto: baseline capture cancels pre-capture ANN result/window, next tick resumes fresh sampling");
+}
+
+void TestVirtualAngleModes(void)
+{
+    TestLegacyRollback();
+    TestCommonFrequencyAndPhase();
+    TestBoundariesRecoveryAndSwitch();
+    TestActualPllFrequencyStep();
+    TestModeSwitchInvalidatesPrediction();
+    TestControlIndependentOfFeatureMode();
+    TestAutomaticBaselineAndFrequencyStep();
+    TestBaselineQualification();
+    TestCaptureCancelsAnnWindow();
+}
